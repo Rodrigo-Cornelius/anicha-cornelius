@@ -1,0 +1,16 @@
+/* style={{color:"white"}} */
+
+.carrito {
+    color:#e48257;
+    
+}
+.carrito:hover{
+    color: #F58B5D;
+}
+
+.test {
+    filter: drop-shadow( 0px 0px 2px #000 )
+}
+.test:hover{
+    filter: drop-shadow( 0px 0px 2px rgb(107, 107, 107) );
+}

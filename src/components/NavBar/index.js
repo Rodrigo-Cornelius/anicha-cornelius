@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from "./NavBar.module.css";
+import CartWidget from '../CartWidget';
 
 
 const NavBar = () => {
@@ -23,7 +24,7 @@ const NavBar = () => {
                                     </a>
                                 </li>
                                 <li className=" nav-item dropdown">
-                                    <a className="nav-link dropdown" href="#testLink"  id="navBarProductos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a className="nav-link dropdown me-lg-2" href="#testLink"  id="navBarProductos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Productos
                                     </a>
                                     <ul className="dropdown-menu" aria-labelledby="navBarProductos">
@@ -34,16 +35,16 @@ const NavBar = () => {
                                     </ul>
                                 </li>
                                 <li>
-                                    <a className="nav-link" href="#testLink" >Ofertas</a>
+                                    <a className="nav-link me-lg-2" href="#testLink" >Ofertas</a>
                                 </li>
                                 <li>
-                                    <a className="nav-link" href="#testLink" >Nosotros</a>
+                                    <a className="nav-link me-lg-2" href="#testLink" >Nosotros</a>
                                 </li>
                                 <li>
-                                    <a className="nav-link" href="#testLink" >Contacto</a>
+                                    <a className="nav-link me-lg-3" href="#testLink">Contacto</a>
                                 </li>
                                 <li>
-                                    <a className="nav-link" href="#testLink" >CARRITO</a>
+                                    <a className="nav-link" href="#testLink" ><CartWidget/></a>
                                 </li>
                             </ul>
                         </div>
