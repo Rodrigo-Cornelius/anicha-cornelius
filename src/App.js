@@ -5,8 +5,10 @@ import ItemListContainer from './components/ItemListContainer';
 function App() {
   return (
     <>
-      <NavBar/>
-      <ItemListContainer greeting="Hola Mundo!!"/>
+      <div className="bg-light bg-gradient">
+        <NavBar/>
+        <ItemListContainer greeting="Hola Mundo!!"/>
+      </div>
     </>
   );
 }

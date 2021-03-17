@@ -1,0 +1,52 @@
+.contenedor {
+    background-color: white;
+    /* height: 150px; */
+    width: 400px;
+    height: 100%;
+    
+}
+
+@media only screen and (max-width: 400px) {
+    .contenedor {
+      width: 90%;
+    }
+}    
+
+.articulo {
+    height: 150px;
+}
+
+.cantidad {
+    width: 75%;
+}
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+.cantidad__bloque{
+    width: 100%;
+}
+
+.cantidad__input {
+    width: 100%;
+    
+}
+
+.btn__menos,
+.btn__mas {
+    border: unset;
+}
+
+.btn__agregarCarrito:focus,
+.btn__menos:focus,
+.btn__mas:focus {
+    /* background-color: #F58B5D; */
+    box-shadow: unset;
+}
