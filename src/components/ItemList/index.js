@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Item from '../Item';
 import styles from "./ItemList.module.css";
 
@@ -7,11 +8,12 @@ import styles from "./ItemList.module.css";
 const ItemList = ({items=[]}) => {
     
     return (
-        <div className='row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2 g-lg-3 text-center'>
+        <div className='container mt-2 mb-3 mx-auto row row-cols-3 justify-content-around gy-3'>
             {items.map(item => 
-                <div className= {`${styles.itemsCard} card col p-2`} key= {item.id}>
+                <Link to={`/item/:${item.id}`} className= {`${styles.itemBox} card col p-2`} key= {item.id}>
                     <Item item={item}/>
-                </div>)
+                </Link>
+                )
             }
         </div>
     )

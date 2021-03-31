@@ -1,3 +1,17 @@
-.itemsCard{
+.itemBox{
+    width: 18rem;
     background-color: white;
+    box-shadow: 0px 10px 19px 0px rgba(0,0,0,0.10);
+}
+
+
+
+
+a,
+a:link, 
+a:visited,
+a:hover,
+a:active {
+    text-decoration: none;
+    color: black;
 }

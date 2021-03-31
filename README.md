@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# Anicha --Creaciones en Madera
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este es el proyecto final del curso React JS de CODERHOUSE.
+Es una tienda on-line de un emprendimiento sobre artículos realizados en madera.
 
-## Available Scripts
+## Dependencias
 
-In the project directory, you can run:
+Para el proyecto se utilizó React JS, [Bootstrap 5.0](https://getbootstrap.com/docs/5.0/getting-started/introduction/) (para la mayoría de estilos CSS) y además se instalaron packages de [Fontawesome](https://fontawesome.com/how-to-use/on-the-web/using-with/react) para utilizar iconos.
 
-### `npm start`
+## React JS
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+A continuación voy a detallar los componentes creados para cumplir con la entrega intermedia del Proyecto:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### NavBar
 
-### `npm test`
+Se ejecuta en el App.js una única vez y se encarga de mostrar la navegación del proyecto además de contener el componente CartWidget.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### CartWidget
 
-### `npm run build`
+Por ahora es solo un icono con algunos efectos css.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### ItemListContainer
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Dentro de un useEffect se encuentra una promesa con un setTimeout para simular la demora de respuesta contra un servidor. También dentro de ese mismo hook, se filtra el array resuelto por la promesa utilizando useParams para saber la categoría seleccionada en el NavBar. Este Array final es enviado al componente ItemList.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### ItemList
 
-### `npm run eject`
+Recibe un Array el cual es mapeado y cada elemento es armado por el componente Item
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Item
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Recibe un Item y lo muestra de manera resumida a través de JSX.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### ItemDetailContainer
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Posee una función "getItem" la cual retorna un array con todos los objetos. Se monta cuando se le hace click a un Item ubicado en el ItemListConteiner desmontando el mismo. Utiliza useParams para identificar a cual Item se le hizo click y así utilizarlo en el componente ItemDetail.
 
-## Learn More
+### ItemDetail
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Basándose en el item recibido, se muestra muchas de las propiedades incluyendo la descripcion. También se monta el componente ItemCount. Se deja lugar también a un párrafo:
+><p>Elementos enviados al carrito: {elementosCarrito}</p>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Este último sirve para demostrar que el evento onAdd() del ItemCount puede enviar información a su parent.
 
-### Code Splitting
+### ItemCount
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Monta un contador el cual maneja el usuario a través de dos botones. Utilizando el stock como límite máximo. Al apretar el botón **Agregar a carrito** ejecuta la función onAdd para enviar la información del input al parent.

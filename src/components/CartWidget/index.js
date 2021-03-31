@@ -11,6 +11,3 @@ export default function CartWidget() {
         </i>
     )
 };
-
-// faShoppingCart
-//{styles.carrito}

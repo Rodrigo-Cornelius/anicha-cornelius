@@ -19,12 +19,9 @@ const ItemCount = ({stock, inicial, onAdd}) => {
 
     }
     
-
+    
     return(
-        <form className={`${styles.contenedor} rounded-3  mx-auto shadow-sm `}>
-            {/* <div className={`${styles.articulo}`}>
-                <h3 className=' text-center pt-1 fs-4 fw-light'>Percheros Personalizados</h3>
-            </div> */}
+        <form className={`${styles.contenedor} mx-auto  `}>
             <div className={`${styles.cantidad}  d-flex mx-auto pb-2`}>
                 <div className={`${styles.cantidad__bloque} mx-auto d-block position-relative`}>
                     <input 
