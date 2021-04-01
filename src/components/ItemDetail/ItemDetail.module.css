@@ -4,6 +4,15 @@
     justify-content: center;
 }
 
+.btn_link{
+    /* height: 100%; */
+    /* justify-content: center; */
+}
+
+.btn_link_terminarCompra{
+    width: 80%;
+    
+}
 
 @media (max-width: 570px) {
     .imgBox {
