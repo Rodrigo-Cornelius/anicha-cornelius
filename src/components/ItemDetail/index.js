@@ -1,10 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import styles from './ItemDetail.module.css';
 import ItemCount from '../ItemCount';
 import {Link} from 'react-router-dom';
+import { CartContext } from "../../context/CartContext";
 
 export default function ItemDetail({item={}}) {
     const [elementosCarrito, setElementosCarrito] = useState(0);
+
+    const {addItem} = useContext(CartContext);
+
 
     return (
         <div className={`container pb-3`}> 
@@ -14,7 +18,7 @@ export default function ItemDetail({item={}}) {
                 </div>
                 <div className={`col border-start ${styles.descriptionBox}`}>
                     <h2>{item.tittle}</h2>
-                    <p>{item.description}</p> 
+                    <p>{item.description}</p>
                     <p className='text-end fs-5'>$ {item.price}</p>
                     <p>Elementos enviados al carrito: {elementosCarrito}</p>
                     {
@@ -22,7 +26,7 @@ export default function ItemDetail({item={}}) {
                             <ItemCount stock={5} inicial={0} onAdd={setElementosCarrito}/>
                         :
                         <Link to='/cart' className={`d-flex align-items-center justify-content-center mt-4 ${styles.btn_link}`}>
-                            <button type="button" className={`btn btn-primary ${styles.btn_link_terminarCompra}`}>
+                            <button onClick = {()=>{addItem(item, elementosCarrito)}} type="button" className={`btn btn-primary ${styles.btn_link_terminarCompra}`}>
                                 Terminar mi compra
                             </button>
                         </Link>
