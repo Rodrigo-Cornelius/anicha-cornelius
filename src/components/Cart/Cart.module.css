@@ -1,0 +1,28 @@
+.imgBox{
+    max-height: 6em;
+    display: flex;
+    justify-content: center;
+}
+
+.precioFinalH3 {
+    background-color: #F58B5D;
+}
+
+
+@media (max-width: 570px) {
+    .imgBox {
+        width: 100%;
+    }
+    
+    .images {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 992px) {
+    .descriptionBox {
+        border-top : 1px solid #dee2e6 !important;
+        border-left: none !important;
+        margin-top: 0.5em;
+    }
+}

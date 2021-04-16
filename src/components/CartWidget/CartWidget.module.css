@@ -8,9 +8,14 @@
     color: #F58B5D;
 }
 
+.carritoCount{
+    font-size: 0.50em;
+}
+
 .test {
     filter: drop-shadow( 0px 0px 2px #000 )
 }
 .test:hover{
     filter: drop-shadow( 0px 0px 2px rgb(107, 107, 107) );
 }
+
