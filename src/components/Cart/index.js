@@ -8,15 +8,27 @@ const Cart = () => {
     const {cart, removeItem} = useContext(CartContext);
     const [precioFinal, setPrecioFinal] = useState(0);
 
+    const [idItem, setIdItem] = useState(null);
+
+    // useEffect(() => {
+    //     console.log('UseEffect para remover')
+    //     idItem && removeItem(idItem)
+
+    // }, [idItem, removeItem]);
+
     useEffect(() => {
+        idItem !== null && removeItem(idItem)
+
+
         let total = 0;
         cart.forEach(e => {
             total+= e.item.price * e.quantity
-            
         });
-
         setPrecioFinal(total);
-    }, [cart]);
+        return
+    }, [cart, idItem, removeItem]);
+
+
     
     // tittle price description pictureURL categoryID
     
@@ -45,7 +57,16 @@ const Cart = () => {
                                         <h2 className='fs-4'>{e.item.tittle}</h2>
                                         <p className='fw-light'>{e.item.description}</p>
                                     </div>
-                                        <button onClick={()=>removeItem(e.item.id)}>Eliminar Item</button>
+
+
+
+                                    {/* <button onClick = {()=>{addItem(item, elementosCarrito)}} */}
+                                        {/* <button onClick={()=>{removeItem(e.item.id)}}>Eliminar Item</button> */}
+                                        <button onClick={()=>setIdItem(e.item.id)} type='button'>Eliminar Item</button>
+
+
+
+
                                 </div>
                                 <div className='row '>
                                         <div className='d-flex justify-content-between px-3'>
@@ -67,4 +88,4 @@ const Cart = () => {
      );
 }
  
-export default Cart;
+export default Cart ;
