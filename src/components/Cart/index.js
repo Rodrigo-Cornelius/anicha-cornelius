@@ -1,20 +1,21 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { CartContext } from "../../context/CartContext";
+import firebase from 'firebase/app';
+import 'firebase/firestore'
 import styles from './Cart.module.css';
 import { Link } from 'react-router-dom';
+import { getFirestore } from "../../firebase";
+
+
 
 
 const Cart = () => {
-    const {cart, removeItem} = useContext(CartContext);
+    const {cart, removeItem, clear} = useContext(CartContext);
     const [precioFinal, setPrecioFinal] = useState(0);
+    const [idCompra, setIdCompra] = useState("");
 
     const [idItem, setIdItem] = useState(null);
 
-    // useEffect(() => {
-    //     console.log('UseEffect para remover')
-    //     idItem && removeItem(idItem)
-
-    // }, [idItem, removeItem]);
 
     useEffect(() => {
         idItem !== null && removeItem(idItem)
@@ -28,9 +29,36 @@ const Cart = () => {
         return
     }, [cart, idItem, removeItem]);
 
+    const generarOrden = (e) => {
+        e.preventDefault();
+        
+        const db = getFirestore();
+        const orderCollection = db.collection("orders");
+        
 
-    
-    // tittle price description pictureURL categoryID
+        let orden = {};
+
+        let itemsOrden = cart.map(cartItem => {
+            const id = cartItem.item.id;
+            const title = cartItem.item.tittle;
+            const price = cartItem.item.price * cartItem.quantity;
+            return {id, title, price}
+        })
+        orden.buyer = { name: document.querySelector('#formName').value, phone: document.querySelector('#formPhone').value, email: document.querySelector('#formEmail').value};
+        orden.items = { items: itemsOrden, date: firebase.firestore.Timestamp.fromDate(new Date()), total :precioFinal}
+        
+        orderCollection.add(orden)
+        .then(({id}) => {
+            setIdCompra(id)
+            // clear()
+        })
+        
+
+
+
+    }
+
+
     
 
     return ( 
@@ -57,16 +85,7 @@ const Cart = () => {
                                         <h2 className='fs-4'>{e.item.tittle}</h2>
                                         <p className='fw-light'>{e.item.description}</p>
                                     </div>
-
-
-
-                                    {/* <button onClick = {()=>{addItem(item, elementosCarrito)}} */}
-                                        {/* <button onClick={()=>{removeItem(e.item.id)}}>Eliminar Item</button> */}
                                         <button onClick={()=>setIdItem(e.item.id)} type='button'>Eliminar Item</button>
-
-
-
-
                                 </div>
                                 <div className='row '>
                                         <div className='d-flex justify-content-between px-3'>
@@ -82,7 +101,55 @@ const Cart = () => {
                         <h3 className={`py-3 rounded-bottom border border-2 ${styles.precioFinalH3}`}>Precio Final</h3>
                         <p className={`fs-4 `}>{precioFinal}</p>
                     </div>
+
+                    <div id="app" className="container">
+                        <form className="row g-3 ">
+                            <div className="col-md-6">
+                                <label htmlFor="formName" className="form-label">Nombre</label>
+                                <input type="text" className="form-control" id="formName" placeholder="Nombre Completo" />
+                            </div>
+                            <div className="col-md-6">
+                                <label htmlFor="formPhone" className="form-label">Telefono</label>
+                                <input type="text" className="form-control" id="formPhone" placeholder={123456789} />
+                            </div>
+                            <div className="col-md-12">
+                                <label htmlFor="formEmail" className="form-label">Email</label>
+                                <input type="text" className="form-control" id="formEmail" placeholder="ejemplo@dominio.com" />
+                            </div>
+                            <div className="col-12">
+                                <button onClick={(e)=>generarOrden(e)} className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit">Comprar</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    
+
+                    {/* Pop-up */}
+
+                    <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="popUpCompra" aria-hidden="true">
+                        <div className="modal-dialog modal-dialog-centered">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="popUpCompra">Compra Realizada</h5>
+                                </div>
+                                <div className="modal-body">
+                                    ID de la orden: {idCompra}
+                                </div>
+                                <div className="modal-footer">
+                                    <button onClick={()=>clear()} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
                 </div>
+                
+                
+
+
             }
         </>
      );

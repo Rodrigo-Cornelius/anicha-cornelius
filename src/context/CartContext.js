@@ -52,7 +52,7 @@ export const CartProvider = ({children}) =>{
     const quantityTotal = () => {
         let total = 0
         cart.length !== 0 && cart.forEach(e => {total=total + e.quantity});
-        console.log(total)
+        
         return total
     }
 

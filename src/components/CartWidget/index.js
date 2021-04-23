@@ -17,13 +17,6 @@ export default function CartWidget() {
         setUnidadesCart(quantityTotal())
     }, [cart, quantityTotal]);
 
-    // useEffect(() => {
-    //     let total = 0
-    //     cart.forEach(e => {
-    //         total=total + e.quantity;
-    //     });
-    //     setUnidadesCart(total)
-    // }, [cart]);
     
 
     return (
@@ -31,7 +24,6 @@ export default function CartWidget() {
             <FontAwesomeIcon className={`${styles.test}`} icon={faShoppingCart}/>
             <span className={` position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark ${styles.carritoCount}`}>
                 {unidadesCart}
-                {console.log('algo')}
             </span>
         </i>
     )
