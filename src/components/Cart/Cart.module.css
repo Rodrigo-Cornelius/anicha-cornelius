@@ -8,6 +8,9 @@
     background-color: #F58B5D;
 }
 
+.idNuevaCompra {
+    color: #e48257;
+}
 
 @media (max-width: 570px) {
     .imgBox {

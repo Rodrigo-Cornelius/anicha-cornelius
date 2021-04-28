@@ -5,6 +5,7 @@ import 'firebase/firestore'
 import styles from './Cart.module.css';
 import { Link } from 'react-router-dom';
 import { getFirestore } from "../../firebase";
+import LoadingIcon from "../LoadingIcon";
 
 
 
@@ -53,7 +54,6 @@ const Cart = () => {
             // clear()
         })
         
-
 
 
     }
@@ -130,13 +130,23 @@ const Cart = () => {
                         <div className="modal-dialog modal-dialog-centered">
                             <div className="modal-content">
                                 <div className="modal-header">
-                                    <h5 className="modal-title" id="popUpCompra">Compra Realizada</h5>
+                                    {idCompra===""?
+                                        <h5 className="modal-title" id="popUpCompra">Comprando...</h5>
+                                        :
+                                        <h5 className="modal-title" id="popUpCompra">Compra Realizada</h5>
+                                    }
                                 </div>
                                 <div className="modal-body">
-                                    ID de la orden: {idCompra}
+                                    {idCompra===""?
+                                    <LoadingIcon bigIcon={false} />
+                                    :
+                                    <>
+                                         ID de la orden: <span className={`fw-bold ${styles.idNuevaCompra}`}>{idCompra}</span>
+                                    </>
+                                    }
                                 </div>
                                 <div className="modal-footer">
-                                    <button onClick={()=>clear()} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    {idCompra!==""&&<button onClick={()=>clear()} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>}
                                 </div>
                             </div>
                         </div>
