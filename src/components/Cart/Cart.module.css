@@ -4,11 +4,22 @@
     justify-content: center;
 }
 
-.precioFinalH3 {
+.precioFinalH3
+{
     background-color: #F58B5D;
 }
 
 .idNuevaCompra {
+    color: #e48257;
+}
+
+.trash {
+    cursor: pointer;
+    color: #dee2e6;
+    transition: color 0.5s;
+}
+
+.trash:hover{
     color: #e48257;
 }
 

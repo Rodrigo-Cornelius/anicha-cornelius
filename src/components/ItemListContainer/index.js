@@ -30,7 +30,7 @@ export default function ItemListContainer() {
                 if (snaptshot.size > 0) {
                     setLoading(false)
                     setItemsArray(snaptshot.docs.map(doc=>{
-                        return {id:doc.id, ... doc.data()}
+                        return {id:doc.id, ...doc.data()}
                         })
                     )
                 }

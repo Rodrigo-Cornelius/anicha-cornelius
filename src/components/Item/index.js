@@ -2,8 +2,6 @@ import React from 'react';
 import styles from './Item.module.css';
 
 
-//Desarrolla la vista de un item donde item es de tipo
-//{id, tittle, price, pictureURL}
 
 const Item = ({item}) => {
     return ( 

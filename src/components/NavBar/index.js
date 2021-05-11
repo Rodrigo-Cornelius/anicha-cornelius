@@ -36,15 +36,6 @@ const NavBar = () => {
                                     </ul>
                                 </li>
                                 <li>
-                                    <Link className="nav-link me-lg-2" to='/' >Ofertas</Link>
-                                </li>
-                                <li>
-                                    <Link className="nav-link me-lg-2" to='/' >Nosotros</Link>
-                                </li>
-                                <li>
-                                    <Link className="nav-link me-lg-3" to='/'>Contacto</Link>
-                                </li>
-                                <li>
                                     <Link className="nav-link" to='/cart' ><CartWidget/></Link>
                                 </li>
                             </ul>

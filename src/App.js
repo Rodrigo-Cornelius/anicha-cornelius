@@ -9,9 +9,9 @@ import { CartProvider } from "./context/CartContext";
 function App() {
 
   return (
-    <CartProvider>
-      <BrowserRouter>
-        <div className="bg-light bg-gradient">
+    <BrowserRouter>
+      <div className="bg-light bg-gradient">
+        <CartProvider>
           <NavBar/>
           <Switch>
             <Route exact path='/'>
@@ -27,9 +27,9 @@ function App() {
               <Cart/>
             </Route>
           </Switch>
-        </div>
+        </CartProvider>
+      </div>
       </BrowserRouter>
-    </CartProvider>
   );
 }
 

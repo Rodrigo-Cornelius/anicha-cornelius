@@ -20,7 +20,6 @@ export default function ItemDetail({item={}}) {
                     <h2>{item.tittle}</h2>
                     <p>{item.description}</p>
                     <p className='text-end fs-5'>$ {item.price}</p>
-                    <p>Elementos enviados al carrito: {elementosCarrito}</p>
                     {
                         elementosCarrito === 0 ?
                             <ItemCount stock={5} inicial={0} onAdd={setElementosCarrito}/>

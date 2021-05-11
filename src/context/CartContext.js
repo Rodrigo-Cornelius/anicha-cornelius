@@ -10,17 +10,10 @@ export const CartProvider = ({children}) =>{
         //agregar cierta cantidad de un item al carrito
         // {item:{}, quantity}
         if (isInCart(item.id)) {
-            quantity += (cart.find(e=> e.item.id===item.id)).quantity;
-            const newCart = cart;
-            newCart.splice(
-                newCart.findIndex((e)=> e.item.id === item.id),
-                1
-            )
-            newCart.push({item:item, quantity:quantity})
-            setCart(newCart)
+            let indexItem = cart.findIndex(cartItem => cartItem.item.id === item.id);
+            cart[indexItem].quantity += quantity;
         }else {
             setCart([...cart, {item:item, quantity:quantity}])
-
         }
         
     }
@@ -50,6 +43,7 @@ export const CartProvider = ({children}) =>{
     }
 
     const quantityTotal = () => {
+        //retorna la cantidad total de items en el carro
         let total = 0
         cart.length !== 0 && cart.forEach(e => {total=total + e.quantity});
         

@@ -1,0 +1,29 @@
+span {
+    font-size: 13px;
+}
+
+.checkIcon {
+    color: #1ed12d;
+}
+
+.crossIcon {
+    color: #bb2929;
+}
+
+.Correcto {
+    border: 2px solid #1ed12d;
+}
+
+.Correcto:focus{
+    border-color: #1ed12d;
+    box-shadow: 0px 0px 12px 0px #1ed12d;
+}
+
+.inCorrecto{
+    border: 2px solid #bb2929;
+}
+
+.inCorrecto:focus{
+    border-color: #bb2929;
+    box-shadow: 0px 0px 12px 0px #bb2929;
+}

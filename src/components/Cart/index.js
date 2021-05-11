@@ -5,13 +5,15 @@ import 'firebase/firestore'
 import styles from './Cart.module.css';
 import { Link } from 'react-router-dom';
 import { getFirestore } from "../../firebase";
-import LoadingIcon from "../LoadingIcon";
+import FormularioCompra from '../FormularioCompra';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 
 
 
 const Cart = () => {
-    const {cart, removeItem, clear} = useContext(CartContext);
+    const {cart, removeItem} = useContext(CartContext);
     const [precioFinal, setPrecioFinal] = useState(0);
     const [idCompra, setIdCompra] = useState("");
 
@@ -27,11 +29,9 @@ const Cart = () => {
             total+= e.item.price * e.quantity
         });
         setPrecioFinal(total);
-        return
     }, [cart, idItem, removeItem]);
 
-    const generarOrden = (e) => {
-        e.preventDefault();
+    const generarOrden = (datos) => {
         
         const db = getFirestore();
         const orderCollection = db.collection("orders");
@@ -45,7 +45,7 @@ const Cart = () => {
             const price = cartItem.item.price * cartItem.quantity;
             return {id, title, price}
         })
-        orden.buyer = { name: document.querySelector('#formName').value, phone: document.querySelector('#formPhone').value, email: document.querySelector('#formEmail').value};
+        orden.buyer = datos
         orden.items = { items: itemsOrden, date: firebase.firestore.Timestamp.fromDate(new Date()), total :precioFinal}
         
         orderCollection.add(orden)
@@ -75,7 +75,7 @@ const Cart = () => {
                 <div className=' pb-3'>
                     <div >
                         {cart.map(e=>
-                            <div key={e.item.tittle}  className={`container my-3 p-2 border border-2 rounded-2 bg-white shadow-sm`}>
+                            <div key={e.item.tittle}  className={`container my-3 p-2 border border-2 rounded-2 bg-white shadow-sm position-relative`}>
                                 
                                 <div className='row '>
                                     <div className= {`col-12 col-lg-2 ${styles.imgBox}`}>
@@ -85,7 +85,7 @@ const Cart = () => {
                                         <h2 className='fs-4'>{e.item.tittle}</h2>
                                         <p className='fw-light'>{e.item.description}</p>
                                     </div>
-                                        <button onClick={()=>setIdItem(e.item.id)} type='button'>Eliminar Item</button>
+                                    {/* <button onClick={()=>setIdItem(e.item.id)} type='button'> Eliminar Item </button> */}
                                 </div>
                                 <div className='row '>
                                         <div className='d-flex justify-content-between px-3'>
@@ -93,67 +93,21 @@ const Cart = () => {
                                             <p className='fs-5 text-end fw-bold'>$ {e.item.price * e.quantity}</p>
                                         </div>
                                 </div>
-                        
+                                    <FontAwesomeIcon onClick={()=>setIdItem(e.item.id)} icon={faTrashAlt} className={`position-absolute top-0 end-0 me-2 mt-2 ${styles.trash} `} size="lg" />
                             </div>
                         )}
                     </div>
+                    {/* Precio Final */}
                     <div className='container text-center shadow-sm'>
                         <h3 className={`py-3 rounded-bottom border border-2 ${styles.precioFinalH3}`}>Precio Final</h3>
                         <p className={`fs-4 `}>{precioFinal}</p>
                     </div>
 
-                    <div id="app" className="container">
-                        <form className="row g-3 ">
-                            <div className="col-md-6">
-                                <label htmlFor="formName" className="form-label">Nombre</label>
-                                <input type="text" className="form-control" id="formName" placeholder="Nombre Completo" />
-                            </div>
-                            <div className="col-md-6">
-                                <label htmlFor="formPhone" className="form-label">Telefono</label>
-                                <input type="text" className="form-control" id="formPhone" placeholder={123456789} />
-                            </div>
-                            <div className="col-md-12">
-                                <label htmlFor="formEmail" className="form-label">Email</label>
-                                <input type="text" className="form-control" id="formEmail" placeholder="ejemplo@dominio.com" />
-                            </div>
-                            <div className="col-12">
-                                <button onClick={(e)=>generarOrden(e)} className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit">Comprar</button>
-                            </div>
-                        </form>
-                    </div>
+
+                    {/* Formulario */}
+
+                    <FormularioCompra generarOrden={generarOrden} idCompra={idCompra}/>
                     
-                    
-
-                    {/* Pop-up */}
-
-                    <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="popUpCompra" aria-hidden="true">
-                        <div className="modal-dialog modal-dialog-centered">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    {idCompra===""?
-                                        <h5 className="modal-title" id="popUpCompra">Comprando...</h5>
-                                        :
-                                        <h5 className="modal-title" id="popUpCompra">Compra Realizada</h5>
-                                    }
-                                </div>
-                                <div className="modal-body">
-                                    {idCompra===""?
-                                    <LoadingIcon bigIcon={false} />
-                                    :
-                                    <>
-                                         ID de la orden: <span className={`fw-bold ${styles.idNuevaCompra}`}>{idCompra}</span>
-                                    </>
-                                    }
-                                </div>
-                                <div className="modal-footer">
-                                    {idCompra!==""&&<button onClick={()=>clear()} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
 
                 </div>
                 

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Item from '../Item';
 import styles from "./ItemList.module.css";
 
-//Desarrolla la vista utilizando un array de items y un map
 
 const ItemList = ({items=[]}) => {
     
